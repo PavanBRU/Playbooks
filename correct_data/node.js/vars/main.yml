@@ -1,0 +1,4 @@
+---
+# vars file for node.js
+npm_pack: [ "knex@0.13.0", "gulp@3.9.1", "eslint@3.5.0", "mocha@3.4.1", "istanbul@0.4.5" ]
+

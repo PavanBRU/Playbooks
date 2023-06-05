@@ -1,0 +1,21 @@
+---
+# tasks file for go
+- name: downloading go package
+  get_url: 
+    url: https://storage.googleapis.com/golang/go1.8.4.linux-amd64.tar.gz
+    dest: /var/tmp/
+- name: installing tar file
+  yum:
+    name: tar
+    state: present
+  
+- name: untaring go package
+  unarchive:
+    src: /var/tmp/go1.8.4.linux-amd64.tar.gz
+    dest: /usr/local/
+    remote_src: yes
+- name: seting path 
+  template:
+    src: bash_profile.j2 
+    dest: ~/.bash_profile 
+    mode: 0644

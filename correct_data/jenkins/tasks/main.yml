@@ -1,0 +1,23 @@
+---
+# tasks file for jenkins
+- name: adding jenkins repo to yum
+  yum_repository:
+    name: jenkins
+    description: Some YUM repo
+    baseurl: http://pkg.jenkins-ci.org/redhat-stable
+    gpgcheck: yes
+
+- name: adding key
+  rpm_key:
+    state: present
+    key: https://pkg.jenkins.io/redhat-stable/jenkins.io.key
+
+- name: installing jenkins server
+  yum:
+    name: jenkins
+    state: present
+
+- name: jenkins service starting
+  service:
+    name: jenkins
+    state: started

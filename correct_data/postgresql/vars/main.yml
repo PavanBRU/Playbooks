@@ -1,0 +1,14 @@
+---
+# vars file for postgresql
+
+user_name: mystique
+
+passwd: mystique
+
+db_name: mystique_test
+
+pg_default_auth_method: trust
+
+pg_cfg_srv_listen_addresses: 'localhost'
+
+pg_cfg_srv_listen_port: 5432

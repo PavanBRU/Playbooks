@@ -1,0 +1,35 @@
+---
+# tasks file for node.js
+- name: installing epel-repo
+  yum:
+    name: https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
+    state: present 
+
+- name: installing Extra packages
+  yum:
+    name: "{{ item }}"
+    state: present
+  with_items: 
+    - "{{ package }}"
+
+- name: Configuration chages nginx.conf
+  template:
+    src: jenkins.conf.j2 
+    dest: /etc/nginx/conf.d/jenkins.conf 
+    mode: 0644
+  notify: restart nginx
+
+- name: installing  libsemanage-python required for selinux
+  yum:
+    name: libsemanage-python
+    state: present
+
+- name: Configure SELinux for nginx proxy configuration 
+  seboolean:
+    name: httpd_can_network_connect
+    state: yes
+    persistent: no
+  notify: restart nginx
+
+
+
